@@ -20,39 +20,41 @@
 
             <div class="form-group">
                 <label for="email"><h6>Email</h6></label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ Request::old('name', $user->email) }}" readonly>
+                <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" readonly>
                 @error('email')
                     <div class="text-danger">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
+            @if (Auth::user()->tipe == 1)
+                <div class="form-group">
+                    <label for="tipe"><h6>Tipe user</h6> </label>
+                    <select name="tipe" id="tipe" class="form-control">
+                        <option value="" hidden>Pilih Tipe User</option>
+                        <option value="1"
+                            @if ($user->tipe == 1)
+                                selected
+                            @endif
+                            >
+                            Administrator
+                        </option>
+                        <option value="0"
+                            @if ($user->tipe == 0)
+                                selected
+                            @endif
+                            >
+                            Penulis
+                        </option>
+                    </select>
+                </div>
+            @endif
 
-            <div class="form-group">
-                <label for="tipe"><h6>Tipe user</h6> </label>
-                <select name="tipe" id="tipe" class="form-control">
-                    <option value="" hidden>Pilih Tipe User</option>
-                    <option value="1"
-                        @if ($user->tipe == 1)
-                            selected
-                        @endif
-                        >
-                        Administrator
-                    </option>
-                    <option value="0"
-                        @if ($user->tipe == 0)
-                            selected
-                        @endif
-                        >
-                        Penulis
-                    </option>
-                </select>
-            </div>
 
             <div class="form-group">
                 <label for="password"><h6>Password</h6></label>
-                <input type="text" class="form-control" id="password" name="password" value="{{ Request::old('name','') }}">
-                
+                <input type="text" class="form-control" id="password" name="password">
+
             </div>
 
             <div class="form-group">

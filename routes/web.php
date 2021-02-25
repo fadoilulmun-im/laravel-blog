@@ -13,13 +13,15 @@
 Auth::routes();
 
 Route::get('/', 'BlogController@index');
-// Route::get('/isi-post', function () {
-//     return view('blog.isi-post');
-// });
+Route::get('/cek', function () {
+    return view('auth.auth-register');
+});
 Route::get('/isi-post/{slug}', 'BlogController@isi_post')->name('blog.isi');
 Route::get('/list-post', 'BlogController@list_post')->name('blog.list');
 Route::get('/list-category/{post_category}', 'BlogController@list_category')->name('blog.category');
 Route::get('/search', 'BlogController@search')->name('blog.search');
+Route::get('/list-tag/{post_tag}', 'BlogController@list_tag')->name('blog.tag');
+
 
 
 Route::group(['middleware' => ['auth']], function () {

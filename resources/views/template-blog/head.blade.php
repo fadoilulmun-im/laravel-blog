@@ -6,16 +6,15 @@
             <div class="container">
                 <!-- social -->
                 <ul class="nav-social">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="https://web.facebook.com/sfadoilul/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com/Fadoilulmun_im" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com/fadoilulmun.im/" target="_blank"><i class="fa fa-instagram"></i></a></li>
                 </ul>
                 <!-- /social -->
 
                 <!-- logo -->
                 <div class="nav-logo">
-                    <a href="index.html" class="logo"><img src="{{ asset('assets-callie/img/logo.png') }}" alt=""></a>
+                    <a href="{{ url('') }}" class="logo"><img src="{{ asset('assets-callie/img/logo.png') }}" alt=""></a>
                 </div>
                 <!-- /logo -->
 
@@ -42,9 +41,9 @@
             <div class="container">
                 <!-- nav -->
                 <ul class="nav-menu">
-                    <li><a href="{{ url('') }}">Beranda</a></li>
+                    <li><a href="{{ url('') }}">Home</a></li>
                     <li class="has-dropdown">
-                        <a href="">Categories</a>
+                        <a>Categories</a>
                         <div class="dropdown">
                             <div class="dropdown-body">
                                 <ul class="dropdown-list">
@@ -56,8 +55,6 @@
                         </div>
                     </li>
                     <li><a href="{{ route('blog.list') }}">List Post</a></li>
-                    <li><a href="#">Health</a></li>
-                    <li><a href="#">Travel</a></li>
                 </ul>
                 <!-- /nav -->
             </div>
@@ -67,21 +64,21 @@
         <!-- Aside Nav -->
         <div id="nav-aside">
             <ul class="nav-aside-menu">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{ url('') }}">Home</a></li>
                 <li class="has-dropdown"><a>Categories</a>
                     <ul class="dropdown">
-                        <li><a href="#">Lifestyle</a></li>
-                        <li><a href="#">Fashion</a></li>
-                        <li><a href="#">Technology</a></li>
-                        <li><a href="#">Travel</a></li>
-                        <li><a href="#">Health</a></li>
+                        @foreach ($category as $hasil)
+                            <li><a href="{{ route('blog.category', $hasil->slug) }}">{{ $hasil->name }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contacts</a></li>
-                <li><a href="#">Advertise</a></li>
+                <li><a href="{{ route('blog.list') }}">List Post</a></li>
             </ul>
             <button class="nav-close nav-aside-close"><span></span></button>
+            <ul style="position: absolute; bottom: 0; width:88%" class="nav-aside-menu">
+                <hr style="margin-bottom: -7px">
+                <li><a href="{{ route('login') }}">Create Post</a></li>
+            </ul>
         </div>
         <!-- /Aside Nav -->
     </div>

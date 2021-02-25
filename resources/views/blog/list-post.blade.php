@@ -11,6 +11,11 @@
                         <a href="{{ route('blog.category', $list_post->category->slug) }}">{{ $list_post->category->name }}</a>
                     </div>
                     <h3 class="post-title"><a href="{{ route('blog.list', $list_post->slug) }}">{{ $list_post->judul }}</a></h3>
+                    <div class="post-category">
+                        @foreach ($list_post->tags as $item)
+                            <a href="category.html"  style="font-size: 10px">{{ $item->name }}</a>
+                        @endforeach
+                    </div>
                     <ul class="post-meta">
                         <li><a href="author.html">{{ $list_post->users->name }}</a></li>
                         <li>{{ $list_post->created_at->diffForHumans() }}</li>

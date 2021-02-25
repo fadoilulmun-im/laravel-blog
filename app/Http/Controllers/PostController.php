@@ -8,6 +8,7 @@ use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Auth;
+use Image;
 
 class PostController extends Controller
 {
@@ -18,7 +19,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::paginate(10);
+        if(Auth::user()->tipe == 1){
+            $post = Post::paginate(10);
+        }else{
+            $post = Post::where('user_id', Auth::user()->id)->paginate(10);
+        }
+
         return view('admin.post.index', compact('post'));
     }
 
@@ -42,17 +48,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $this->validate($request, [
-            'judul' => 'required',
+            'judul' => 'required|unique:posts,judul',
             'category_id' => 'required',
             'content' => 'required',
-            'gambar' => 'required',
-            'tags' => 'required'
+            'gambar' => 'required|image|mimes:png,jpg,jpeg'
         ]);
-        
+
         $gambar = $request->gambar;
         $new_gambar = time().$gambar->getClientOriginalName();
+        Image::make($gambar)->save('public/uplouds/posts/'. $new_gambar);
+        $canvas = Image::canvas(1200, 800);
+        $resizeImage  = Image::make($gambar)->resize(1200, 800, function($constraint) {
+            $constraint->aspectRatio();
+        });
+        $canvas->insert($resizeImage, 'center');
+        $canvas->save('public/uplouds/posts/'. $new_gambar);
 
         $post = Post::create([
             'judul' => $request->judul,
@@ -65,7 +76,7 @@ class PostController extends Controller
 
         $post->tags()->attach($request->tags);
 
-        $gambar->move('public/uplouds/posts', $new_gambar);
+        // $resizeImage->move('public/uplouds/posts', $new_gambar);
         return redirect()->route('post.index')->with('success', 'Postingan anda berhasil disimpan');
     }
 
@@ -104,17 +115,22 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'judul' => 'required',
+            'judul' => "required|unique:posts,judul,$id,id",
             'category_id' => 'required',
-            'content' => 'required',
-            'tags' => 'required'
+            'content' => 'required'
         ]);
 
         $post = Post::findorfail($id);
         if($request->has('gambar')){
             $gambar = $request->gambar;
             $new_gambar = time().$gambar->getClientOriginalName();
-            $gambar->move('public/uplouds/posts', $new_gambar);
+            Image::make($gambar)->save('public/uplouds/posts/'. $new_gambar);
+            $canvas = Image::canvas(1200, 800);
+            $resizeImage  = Image::make($gambar)->resize(1200, 800, function($constraint) {
+                $constraint->aspectRatio();
+            });
+            $canvas->insert($resizeImage, 'center');
+            $canvas->save('public/uplouds/posts/'. $new_gambar);
 
             $post_data = [
                 'judul' => $request->judul,

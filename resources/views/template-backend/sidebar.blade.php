@@ -18,26 +18,27 @@
         </ul>
       </li>
 
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-clipboard"></i> <span>Category</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ route('category.index') }}">Catgeories List</a></li>
-        </ul>
-      </li>
+    @if (Auth::user()->tipe == 1)
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-clipboard"></i> <span>Category</span></a>
+            <ul class="dropdown-menu">
+            <li><a class="nav-link" href="{{ route('category.index') }}">Catgeories List</a></li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-hashtag"></i> <span>Tag</span></a>
+            <ul class="dropdown-menu">
+            <li><a class="nav-link" href="{{ route('tag.index') }}">Tags List</a></li>
+            </ul>
+        </li>
 
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-hashtag"></i> <span>Tag</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ route('tag.index') }}">Tags List</a></li>
-        </ul>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user"></i> <span>User</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ route('user.index') }}">Users List</a></li>
-        </ul>
-      </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user"></i> <span>User</span></a>
+            <ul class="dropdown-menu">
+            <li><a class="nav-link" href="{{ route('user.index') }}">Users List</a></li>
+            </ul>
+        </li>
+    @endif
 
     </ul>
 </aside>

@@ -11,6 +11,11 @@
                         <a href="{{ route('blog.category', $isiPost->category->slug) }}">{{ $isiPost->category->name }}</a>
                     </div>
                     <h1>{{ $isiPost->judul }}</h1>
+                    <div class="post-category">
+                        @foreach ($isiPost->tags as $item)
+                            <a href="category.html"  style="font-size: 10px">{{ $item->name }}</a>
+                        @endforeach
+                    </div>
                     <ul class="post-meta">
                         <li><a href="">{{ $isiPost->users->name }}</a></li>
                         <li>{{ $isiPost->created_at }}</li>
