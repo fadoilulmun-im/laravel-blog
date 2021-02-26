@@ -36,7 +36,7 @@
                         </ul>
                     </td>
                     <td>{{ $value->users->name }}</td>
-                    <td><img src="{{ asset($value->gambar) }}" class="img-fluid" width="100px" alt=""></td>
+                    <td><img src="{{ asset('public/'.$value->gambar) }}" class="img-fluid" width="100px" alt="">{{ $value->gambar }}</td>
                     <td>
                         <form action="{{ route('post.destroy', $value->id) }}" method="POST">
                             @csrf

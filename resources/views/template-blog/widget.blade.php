@@ -75,7 +75,7 @@
         <!-- post -->
         @foreach ($popular as $post)
             <div class="post post-widget">
-                <a class="post-img" href="{{ route('blog.isi', $post->slug) }}"><img src="{{ url($post->gambar) }}" alt=""></a>
+                <a class="post-img" href="{{ route('blog.isi', $post->slug) }}"><img src="{{ asset($post->gambar) }}" alt=""></a>
                 <div class="post-body">
                     <div class="post-category">
                         <a href="{{ route('blog.category', $post->category->slug) }}">{{ $post->category->name }}</a>
