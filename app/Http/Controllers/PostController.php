@@ -57,7 +57,7 @@ class PostController extends Controller
 
         $gambar = $request->gambar;
         $new_gambar = time().$gambar->getClientOriginalName();
-        Image::make($gambar)->save('public/uplouds/posts/'. $new_gambar);
+        Image::make($gambar->getRalPath())->save('public/uplouds/posts/'. $new_gambar);
         $canvas = Image::canvas(1200, 800);
         $resizeImage  = Image::make($gambar)->resize(1200, 800, function($constraint) {
             $constraint->aspectRatio();
