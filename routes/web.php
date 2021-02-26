@@ -13,9 +13,9 @@
 Auth::routes();
 
 Route::get('/', 'BlogController@index');
-Route::get('/cek', function () {
-    return view('auth.auth-register');
-});
+// Route::get('/cek', function () {
+//     return view('auth.auth-register');
+// });
 Route::get('/isi-post/{slug}', 'BlogController@isi_post')->name('blog.isi');
 Route::get('/list-post', 'BlogController@list_post')->name('blog.list');
 Route::get('/list-category/{post_category}', 'BlogController@list_category')->name('blog.category');
