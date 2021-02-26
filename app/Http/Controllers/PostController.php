@@ -7,6 +7,7 @@ use App\Category;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Auth;
 use Image;
 
@@ -56,9 +57,13 @@ class PostController extends Controller
         ]);
 
         $gambar = $request->gambar;
+        $img = Image::make($gambar)->encode();
         $new_gambar = time().$gambar->getClientOriginalName();
+        Storage::put($new_gambar, $gambar);
         $path = public_path('public/uplouds/posts/' . $new_gambar);
-        Image::make($gambar->getRealPath())->save($path);
+        Storage::move($new_gambar, $path);
+
+
         $canvas = Image::canvas(1200, 800);
         $resizeImage  = Image::make($gambar)->resize(1200, 800, function($constraint) {
             $constraint->aspectRatio();
