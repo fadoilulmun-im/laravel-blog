@@ -16,6 +16,12 @@
                             <a href="category.html"  style="font-size: 10px">{{ $item->name }}</a>
                         @endforeach
                     </div>
+                    <div>
+                        {!! $limit_str->limit($list_post->content, $limit = 200, $end = '.......') !!}
+                        @if (strlen($list_post->content) > 200)
+                            <a href="{{ route('blog.isi', $list_post->slug) }}" class="text-primary" style="font-size: 0.8em">Baca Selengkapnya</a>
+                        @endif
+                    </div>
                     <ul class="post-meta">
                         <li><a href="author.html">{{ $list_post->users->name }}</a></li>
                         <li>{{ $list_post->created_at->diffForHumans() }}</li>

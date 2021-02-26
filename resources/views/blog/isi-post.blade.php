@@ -31,6 +31,8 @@
 
 @section('section-2')
     @foreach ($isi as $isiPost)
-        <p>{!! $isiPost->content !!}</p>
+    <div>
+        {!! $isiPost->content !!}
+    </div>
     @endforeach
 @endsection
