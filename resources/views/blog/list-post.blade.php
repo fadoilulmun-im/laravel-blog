@@ -19,7 +19,7 @@
                     <div>
                         {!! $limit_str->limit($list_post->content, $limit = 200, $end = '.......') !!}
                         @if (strlen($list_post->content) > 200)
-                            <a href="{{ route('blog.isi', $list_post->slug) }}" class="text-primary" style="font-size: 0.8em">Baca Selengkapnya</a>
+                            <a href="{{ route('blog.isi', $list_post->slug) }}" class="text-primary" style="font-size: 12px">Baca Selengkapnya</a>
                         @endif
                     </div>
                     <ul class="post-meta">

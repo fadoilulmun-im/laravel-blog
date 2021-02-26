@@ -63,7 +63,6 @@ class PostController extends Controller
         $path = public_path('public/uplouds/posts/' . $new_gambar);
         Storage::move($new_gambar, $path);
 
-
         $canvas = Image::canvas(1200, 800);
         $resizeImage  = Image::make($gambar)->resize(1200, 800, function($constraint) {
             $constraint->aspectRatio();
@@ -129,8 +128,12 @@ class PostController extends Controller
         $post = Post::findorfail($id);
         if($request->has('gambar')){
             $gambar = $request->gambar;
+            $img = Image::make($gambar)->encode();
             $new_gambar = time().$gambar->getClientOriginalName();
-            Image::make($gambar)->save('public/uplouds/posts/'. $new_gambar);
+            Storage::put($new_gambar, $gambar);
+            $path = public_path('public/uplouds/posts/' . $new_gambar);
+            Storage::move($new_gambar, $path);
+
             $canvas = Image::canvas(1200, 800);
             $resizeImage  = Image::make($gambar)->resize(1200, 800, function($constraint) {
                 $constraint->aspectRatio();
