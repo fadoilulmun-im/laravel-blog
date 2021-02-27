@@ -68,7 +68,7 @@ class PostController extends Controller
             $constraint->aspectRatio();
         });
         $canvas->insert($resizeImage, 'center');
-        $save = $canvas->save($path);
+        $save = $canvas->save('public/uplouds/posts/' . $new_gambar);
         Storage::disk('google')->put($new_gambar, $save);
 
         $post = Post::create([
@@ -139,7 +139,7 @@ class PostController extends Controller
                 $constraint->aspectRatio();
             });
             $canvas->insert($resizeImage, 'center');
-            $save = $canvas->save($path);
+            $save = $canvas->save('public/uplouds/posts/' . $new_gambar);
             Storage::disk('google')->put($new_gambar, $save);
 
             $post_data = [
