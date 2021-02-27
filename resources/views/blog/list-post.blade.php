@@ -5,7 +5,7 @@
         @foreach ($data as $list_post)
             <!-- post -->
             <div class="post post-row">
-                <a class="post-img" href="{{ route('blog.isi', $list_post->slug) }}"><img src="{{ asset($list_post->gambar) }}" alt="{{ $list_post->judul }}"></a>
+                <a class="post-img" href="{{ route('blog.isi', $list_post->slug) }}"><img src="{{ $list_post->gambar }}" alt="{{ $list_post->judul }}"></a>
                 <div class="post-body">
                     <div class="post-category">
                         <a href="{{ route('blog.category', $list_post->category->slug) }}">{{ $list_post->category->name }}</a>

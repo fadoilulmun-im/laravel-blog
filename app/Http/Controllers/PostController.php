@@ -68,20 +68,20 @@ class PostController extends Controller
             $constraint->aspectRatio();
         });
         $canvas->insert($resizeImage, 'center');
-        $canvas->save('public/uplouds/posts/'. $new_gambar);
+        $save = $canvas->save($path);
+        Storage::disk('google')->put($new_gambar, $save);
 
         $post = Post::create([
             'judul' => $request->judul,
             'category_id' => $request->category_id,
             'content' => $request->content,
-            'gambar' => 'public/uplouds/posts/'.$new_gambar,
+            'gambar' => Storage::disk('google')->url($new_gambar),
             'slug' => Str::slug($request->judul),
             'user_id' => Auth::id()
         ]);
 
         $post->tags()->attach($request->tags);
 
-        // $resizeImage->move('public/uplouds/posts', $new_gambar);
         return redirect()->route('post.index')->with('success', 'Postingan anda berhasil disimpan');
     }
 
@@ -139,13 +139,14 @@ class PostController extends Controller
                 $constraint->aspectRatio();
             });
             $canvas->insert($resizeImage, 'center');
-            $canvas->save('public/uplouds/posts/'. $new_gambar);
+            $save = $canvas->save($path);
+            Storage::disk('google')->put($new_gambar, $save);
 
             $post_data = [
                 'judul' => $request->judul,
                 'category_id' => $request->category_id,
                 'content' => $request->content,
-                'gambar' => 'public/uplouds/posts/'.$new_gambar,
+                'gambar' => Storage::disk('google')->url($new_gambar),
                 'slug' => Str::slug($request->judul)
             ];
         }else{
