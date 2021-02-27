@@ -59,7 +59,7 @@ class PostController extends Controller
         $gambar = $request->gambar;
         $img = Image::make($gambar)->encode();
         $new_gambar = time().$gambar->getClientOriginalName();
-        Storage::put($new_gambar, $gambar);
+        Storage::put($new_gambar, $img);
         $path = public_path('public/uplouds/posts/' . $new_gambar);
         Storage::move($new_gambar, $path);
 
@@ -130,7 +130,7 @@ class PostController extends Controller
             $gambar = $request->gambar;
             $img = Image::make($gambar)->encode();
             $new_gambar = time().$gambar->getClientOriginalName();
-            Storage::put($new_gambar, $gambar);
+            Storage::put($new_gambar, $img);
             $path = public_path('public/uplouds/posts/' . $new_gambar);
             Storage::move($new_gambar, $path);
 
