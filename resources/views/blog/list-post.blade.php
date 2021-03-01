@@ -29,7 +29,7 @@
                 </div>
             </div>
             <!-- /post -->
-        @empty()
+        @empty
             <div class="post post-row">
                 <h1>Empty Post</h1>
             </div>
