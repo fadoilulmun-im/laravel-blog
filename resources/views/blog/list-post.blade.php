@@ -2,7 +2,7 @@
 @section('section-2')
     <div class="col-md">
 
-        @foreach ($data as $list_post)
+        @forelse ($data as $list_post)
             <!-- post -->
             <div class="post post-row">
                 <a class="post-img" href="{{ route('blog.isi', $list_post->slug) }}"><img src="{{ $list_post->gambar }}" alt="{{ $list_post->judul }}"></a>
@@ -29,7 +29,11 @@
                 </div>
             </div>
             <!-- /post -->
-        @endforeach
+        @empty($record)
+            <div class="post post-row">
+                <h1>Empty Post</h1>
+            </div>
+        @endforelse
 
 
         <div class="section-row loadmore text-center">
